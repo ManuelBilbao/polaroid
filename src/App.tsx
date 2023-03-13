@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Button, Container, Row, Col, Card, Form} from "react-bootstrap";
 import { CaretUpFill, CaretDownFill, CaretLeftFill, CaretRightFill, Dot, ArrowClockwise, ArrowCounterclockwise, SymmetryHorizontal, SymmetryVertical } from "react-bootstrap-icons";
+import ImageUploader from "./components/image-uploader";
 
 function App() {
 	const cropOptions = [
-		[{value: "TC", icon: <CaretUpFill />}],
-		[{value: "CL", icon: <CaretLeftFill />}, {value: "C", icon: <Dot />}, {value: "CR", icon: <CaretRightFill />}],
-		[{value: "BC", icon: <CaretDownFill />}]
+		[{value: "top", icon: <CaretUpFill />}],
+		[{value: "left", icon: <CaretLeftFill />}, {value: "center", icon: <Dot />}, {value: "right", icon: <CaretRightFill />}],
+		[{value: "bottom", icon: <CaretDownFill />}]
 	];
 
 	const [keepAR, setKeepAR] = useState(true);
-	const [cropOption, setCropOption] = useState("C");
+	const [cropOption, setCropOption] = useState("center");
 	const [rotate, setRotate] = useState(0);
 	const [flipH, setFlipH] = useState(false);
 	const [flipV, setFlipV] = useState(false);
@@ -91,7 +92,9 @@ function App() {
 				<Col md={6}>
 					<Card>
 						<Card.Body>
-							<span style={{color: phraseColor}}>{ phraseText }</span> {cropOption} {rotate}º {flipH && "FlipH"} {flipV && "FlipV"}
+							<span style={{color: phraseColor}}>{ phraseText }</span>
+							<br />
+							<ImageUploader keepAR={keepAR} position={cropOption} rotate={rotate} flipH={flipH} flipV={flipV} />
 						</Card.Body>
 					</Card>
 				</Col>
